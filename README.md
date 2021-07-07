@@ -33,9 +33,9 @@ yarn run test
 - `npm/yarn run deploy`: deploys all contracts to kovan testnet
 - `npm/yarn run deploy-verify:kovan`: deploys all contracts and auto verifies on kovan testnet
 - `npm/yarn run deploy:halo-kovan`: use to mint dummy HALO to your wallet. you can change the receiver, HALO token address and number of tokens to mint in ether units. this script only works on kovan
-- `npm/yarn run deploy:onlyrewards-kovan` : use to deploy only the rewards contract. change the constructor parameters when necessary
+- `npm/yarn run deploy:onlyrewards-kovan` : use to deploy only the rewards contract. change the constructor parameters 
+- `npm/yarn run deploy`: deploys all contracts to kovan testnetwhen necessary
 
 ### Audits
 
-- `npm/yarn run deploy`: deploys all contracts to kovan testnet
 All code in this repo has been audited by Monoceros Alpha in this public repo https://github.com/monoceros-alpha/review-halodao-rewards-2021-06
