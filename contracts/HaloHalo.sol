@@ -8,7 +8,7 @@ import {SafeMath} from '@openzeppelin/contracts/math/SafeMath.sol';
 
 contract HaloHalo is ERC20('Rainbow Pool', 'xRNBW') {
   using SafeMath for uint256;
-  IERC20 public halo;
+  IERC20 public immutable halo;
   uint256 public constant DECIMALS = 1e18;
   uint256 public genesisTimestamp;
 
@@ -33,7 +33,7 @@ contract HaloHalo is ERC20('Rainbow Pool', 'xRNBW') {
     if (totalShares == 0 || totalHalo == 0) {
       _mint(msg.sender, _amount);
     } else {
-      // Calculate and mint the amount of HALOHALO the Halo is worth. The ratio will change overtime, as HALOHALO is burned/minted and Halo deposited from LP rewards.
+      // Calculate and mint the amount of HALOHALO the Halo is worth. The ratio will change overtime, as Halo deposited from LP rewards and protocol fee.
       uint256 haloHaloAmount = _amount.mul(totalShares).div(totalHalo);
       _mint(msg.sender, haloHaloAmount);
     }
@@ -48,10 +48,9 @@ contract HaloHalo is ERC20('Rainbow Pool', 'xRNBW') {
     // Gets the amount of HALOHALO in existence
     uint256 totalShares = totalSupply();
     // Calculates the amount of Halo the HALOHALO is worth
-    uint256 haloHaloAmount =
-      _share.mul(halo.balanceOf(address(this))).div(totalShares);
+    uint256 haloAmount = _share.mul(halo.balanceOf(address(this))).div(totalShares);
     _burn(msg.sender, _share);
-    halo.transfer(msg.sender, haloHaloAmount);
+    halo.transfer(msg.sender, haloAmount);
   }
 
   function getCurrentHaloHaloPrice() public view returns (uint256) {
